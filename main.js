@@ -1,5 +1,9 @@
 var paddle2 =10,paddle1=10;
 
+var rwX = 0 ;
+var rwY = 0 ;
+var rwscore = 0 ;
+
 var paddle1X = 10,paddle1Height = 110;
 var paddle2Y = 685,paddle2Height = 70;
 
@@ -26,6 +30,7 @@ function setup(){
   video.hide() ;
 
   poseNet = ml5.poseNet(video, modelLoaded) ;
+  poseNet.on("pose", gotPoses) ;
 }
 
 function modelLoaded() 
@@ -33,9 +38,27 @@ function modelLoaded()
   console.log("Model Loaded !");
 }
 
+function gotPoses(results) 
+{
+  if(results.length > 0)
+  {
+    console.log(results);
+    rwX = results[0].pose.rightWrist.x ;
+    rwY = results[0].pose.rightWrist.y ;
+    rwscore = results[0].pose.rightWrist.score ;
+  }
+}
+
 function draw(){
 
  background(0); 
+
+ if(rwscore > 0.2)
+ {
+    fill("red");
+    stroke("black");
+    circle(rwX,rwY,"50px") ;
+ }
 
  image(video,0,0,700,600) ;
 
