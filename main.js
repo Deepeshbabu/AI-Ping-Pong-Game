@@ -25,6 +25,7 @@ var ball = {
 function setup(){
   var canvas =  createCanvas(700,600);
   canvas.parent("canvas") ;
+  gamestatus = "" ;
   video = createCapture(VIDEO) ;
   video.size(700,600);
   video.hide() ;
@@ -51,13 +52,19 @@ function gotPoses(results)
 
 function draw(){
 
- background(0); 
+  background(0); 
 
  if(rwscore > 0.2)
  {
     fill("red");
     stroke("black");
     circle(rwX,rwY,"50px") ;
+ }
+ 
+ function startgame() 
+ {
+   gamestatus = "start" ;
+   document.getElementById("status").innerHTML = "Game Is Loaded !" ;
  }
 
  image(video,0,0,700,600) ;
