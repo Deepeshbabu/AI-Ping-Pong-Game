@@ -20,7 +20,7 @@
     width: 100%;
 }
 
-#start,#status
+#status,#restart
 {
     font-size: 22px;
 }
